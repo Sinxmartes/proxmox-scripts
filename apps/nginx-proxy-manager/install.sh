@@ -128,7 +128,7 @@ step_start "Python"
   
   step_end "Python ${CLR_CYB}v$PYTHON_VERSION${CLR} ${CLR_GN}and Pip${CLR} ${CLR_CYB}v$PIP_VERSION${CLR} ${CLR_GN}Installed"
 
-#step_start "Openresty"
+step_start "Openresty"
 #  if [ "$EPS_OS_DISTRO" = "alpine" ]; then
 #    os_fetch -O /etc/apk/keys/admin@openresty.com-5ea678a6.rsa.pub 'http://openresty.org/package/admin@openresty.com-5ea678a6.rsa.pub'
 #    sed -i '/openresty.org/d' /etc/apk/repositories >$__OUTPUT
@@ -150,7 +150,9 @@ step_start "Python"
 #    printf "$source" | tee /etc/apt/sources.list.d/openresty.list >$__OUTPUT
 #  fi
 #
-#  pkg_update
+   pkg_update
+   mkdir -p /etc/nginx/conf
+   ln -sf /etc/nginx/nginx.conf /etc/nginx/conf/nginx.conf
 #  pkg_add openresty
 #  ln -sf /usr/local/openresty/nginx/sbin/nginx /usr/sbin/nginx
 #  ln -sf /usr/local/openresty/nginx/ /etc/nginx
