@@ -128,34 +128,34 @@ step_start "Python"
   
   step_end "Python ${CLR_CYB}v$PYTHON_VERSION${CLR} ${CLR_GN}and Pip${CLR} ${CLR_CYB}v$PIP_VERSION${CLR} ${CLR_GN}Installed"
 
-step_start "Openresty"
-  if [ "$EPS_OS_DISTRO" = "alpine" ]; then
-    os_fetch -O /etc/apk/keys/admin@openresty.com-5ea678a6.rsa.pub 'http://openresty.org/package/admin@openresty.com-5ea678a6.rsa.pub'
-    sed -i '/openresty.org/d' /etc/apk/repositories >$__OUTPUT
-    printf "http://openresty.org/package/alpine/v$EPS_OS_VERSION/main"| tee -a /etc/apk/repositories >$__OUTPUT
-  else
-    os_fetch -O- https://openresty.org/package/pubkey.gpg | gpg --yes --dearmor -o /usr/share/keyrings/openresty.gpg &>$__OUTPUT
-
-    repository=http://openresty.org/package/$EPS_OS_DISTRO
-    if [ "$EPS_OS_ARCH" != "amd64" ]; then
-      repository=http://openresty.org/package/$EPS_OS_ARCH/$EPS_OS_DISTRO
-    fi
-
-    source="deb [arch=$EPS_OS_ARCH signed-by=/usr/share/keyrings/openresty.gpg] $repository $EPS_OS_CODENAME "
-    if [ "$EPS_OS_DISTRO" = "debian" ]; then
-      source+="openresty"
-    else
-      source+="main"
-    fi
-    printf "$source" | tee /etc/apt/sources.list.d/openresty.list >$__OUTPUT
-  fi
-
-  pkg_update
-  pkg_add openresty
-  ln -sf /usr/local/openresty/nginx/sbin/nginx /usr/sbin/nginx
-  ln -sf /usr/local/openresty/nginx/ /etc/nginx
-  OPENRESTY_VERSION=$(openresty -v 2>&1 | grep -o '[0-9.]*$')
-  step_end "Openresty ${CLR_CYB}v$OPENRESTY_VERSION${CLR} ${CLR_GN}Installed"
+#step_start "Openresty"
+#  if [ "$EPS_OS_DISTRO" = "alpine" ]; then
+#    os_fetch -O /etc/apk/keys/admin@openresty.com-5ea678a6.rsa.pub 'http://openresty.org/package/admin@openresty.com-5ea678a6.rsa.pub'
+#    sed -i '/openresty.org/d' /etc/apk/repositories >$__OUTPUT
+#    printf "http://openresty.org/package/alpine/v$EPS_OS_VERSION/main"| tee -a /etc/apk/repositories >$__OUTPUT
+#  else
+#    os_fetch -O- https://openresty.org/package/pubkey.gpg | gpg --yes --dearmor -o /usr/share/keyrings/openresty.gpg &>$__OUTPUT
+#
+#    repository=http://openresty.org/package/$EPS_OS_DISTRO
+#    if [ "$EPS_OS_ARCH" != "amd64" ]; then
+#      repository=http://openresty.org/package/$EPS_OS_ARCH/$EPS_OS_DISTRO
+#    fi
+#
+#    source="deb [arch=$EPS_OS_ARCH signed-by=/usr/share/keyrings/openresty.gpg] $repository $EPS_OS_CODENAME "
+#    if [ "$EPS_OS_DISTRO" = "debian" ]; then
+#      source+="openresty"
+#    else
+#      source+="main"
+#    fi
+#    printf "$source" | tee /etc/apt/sources.list.d/openresty.list >$__OUTPUT
+#  fi
+#
+#  pkg_update
+#  pkg_add openresty
+#  ln -sf /usr/local/openresty/nginx/sbin/nginx /usr/sbin/nginx
+#  ln -sf /usr/local/openresty/nginx/ /etc/nginx
+#  OPENRESTY_VERSION=$(openresty -v 2>&1 | grep -o '[0-9.]*$')
+#  step_end "Openresty ${CLR_CYB}v$OPENRESTY_VERSION${CLR} ${CLR_GN}Installed"
 
 step_start "Node.js"
   _nodePackage=""
