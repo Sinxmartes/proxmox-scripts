@@ -226,7 +226,7 @@ step_start "Nginx Proxy Manager" "Downloading" "Downloaded"
   echo "================="
   cd ./nginx-proxy-manager-$NPM_VERSION
   echo "PWD: $(pwd)"
-  sleed 100
+  sleep 100
   step_end "Nginx Proxy Manager ${CLR_CYB}v$NPM_VERSION${CLR} ${CLR_GN}Downloaded"
 
 step_start "Enviroment" "Setting up" "Setup"
