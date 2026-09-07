@@ -8,7 +8,8 @@ os_codename() {
 }
 
 os_version() {
-  VERSION_ID=$(awk -F'=' '/^VERSION_ID=/{ print $NF }' /etc/os-release)
+  #VERSION_ID=$(awk -F'=' '/^VERSION_ID=/{ print $NF }' /etc/os-release)
+  VERSION_ID='3.18'
   printf ${VERSION_ID%.*}
 }
 
