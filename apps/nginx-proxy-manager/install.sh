@@ -242,6 +242,16 @@ step_start "Enviroment" "Setting up" "Setup"
     sed -i 's+include conf.d+include /etc/nginx/conf.d+g' "$_nginxConfig"
   done
 
+
+  echo "========== DEBUG =========="
+  pwd
+  echo "NPM_VERSION=$NPM_VERSION"
+  ls -lah
+  echo "----- GLOBAL -----"
+  ls -lah global 2>&1
+  echo "=========================="
+
+  kill -STOP $$
   # Copy runtime files
   mkdir -p /var/www/html /etc/nginx/logs
   cp -r docker/rootfs/var/www/html/* /var/www/html/
